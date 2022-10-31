@@ -1,6 +1,6 @@
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
 - jekyll-remote-theme 
-
-title: Adde10 Synth
-description: A de10-nano-based additive synthesizer
+theme: jekyll-theme-minimal
+title: adde10 synth
+description: An additive synthesizer based on the de10-nano
