@@ -27,6 +27,7 @@ In the following, I describe the initial requirements that I had for the adde10.
 
 Every parameter of the synthesizer should be [MIDI](https://en.wikipedia.org/wiki/MIDI) controllable. 
 I wanted a frequency range of 0.5Hz to 20kHz with 0.005Hz resolution and 8 (detuneable) voice polyphony.
+The global latency, i.e. the delay between MIDI control change and corresponding audio sample change in the DAC registers, should be less than 5ms.
 
 I also wanted to incorporate cool audio effects operating on the partials such as:
 - Controllable comb filters
@@ -53,10 +54,15 @@ If manageable, I wanted to add support for inharmonic spectrum-- in general, I w
 The de10-nano architecture allowed me to take advantage of a HPS + FPGA combo to meet my needs.
 In this section, I describe how I chose to implement the synthesizer with the previous requirements in mind. 
 
-### Parameter parsing 
+### Parameter parsing and formatting
 
 An user should interact with the underlying synthesizer engine with physical controls. This is achievable with a MIDI controller. 
 For convenience purposes, I chose to develop the software responsible for the parsing of the MIDI from the controller **on the HPS**. 
+
+#### Embedded Linux choice
+
+[This document](https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/wp-01245-optimize-real-time-performance-with-altera-socs.pdf) convinced me to develop the application on Linux. The time for parameter parsing, processing and sending should be well under 
+For simplicity purposes and generation speed purposes, I chose to generate the embedded Linux with Buildroot. 
 
 ### Audio generation
 
